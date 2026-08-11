@@ -10,7 +10,7 @@ permissions: {}
 
 jobs:
   build:
-    if: github.repository == 'BarbossHack/Signal-Desktop-Fedora-Debug'
+    if: github.repository == 'BarbossHack/signal-desktop-fedora-debug'
     strategy:
       matrix:
         releasever: [45, rawhide]
@@ -52,7 +52,7 @@ jobs:
 
   deploy-repository:
     needs: build
-    if: github.repository == 'BarbossHack/Signal-Desktop-Fedora-Debug'
+    if: github.repository == 'BarbossHack/signal-desktop-fedora-debug'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -70,7 +70,7 @@ jobs:
 
   release:
     needs: deploy-repository
-    if: github.repository == 'BarbossHack/Signal-Desktop-Fedora-Debug'
+    if: github.repository == 'BarbossHack/signal-desktop-fedora-debug'
     runs-on: ubuntu-latest
     permissions:
       contents: write
