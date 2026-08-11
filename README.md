@@ -1,0 +1,56 @@
+# Signal-Desktop-Fedora
+
+[Signal Desktop](https://github.com/signalapp/Signal-Desktop) RPM for Fedora.
+
+## How to install
+
+```bash
+sudo curl -so /etc/yum.repos.d/signal-desktop-barbosshack.repo "https://raw.githubusercontent.com/BarbossHack/Signal-Desktop-Fedora/refs/heads/master/repo/signal-desktop-barbosshack.repo"
+sudo dnf install signal-desktop
+```
+
+## Build it yourself
+
+```bash
+make
+make install
+```
+
+## Custom builds
+
+### Change versions
+
+You can change the Signal Desktop or Fedora version by using the following parameters:
+
+```bash
+make SIGNAL_VERSION=v8.22.0 FEDORA_VERSION=44
+make install
+```
+
+`SIGNAL_VERSION` should correspond to a valid tag from [the Signal Desktop repo](https://github.com/signalapp/Signal-Desktop/tags).
+
+### Standalone primary device
+
+Signal Desktop allows you to register a new Signal account without a phone, but you’ll need to build the `standalone` version.
+
+```bash
+make standalone
+make install
+```
+
+Next, open Signal Desktop, and on the QR code screen, go to the File menu and select `Set Up as Standalone Device`, which goes through the registration process like you would on a phone.
+
+### Custom patch
+
+You can apply a custom patch file using `PATCH_FILE` argument in the `make` command.
+
+For example, you can use `Signal-Desktop-persistent-messages.patch` which will prevents all types of message deletion (`expiration` and `delete for everyone`).
+
+```bash
+make PATCH_FILE=Signal-Desktop-persistent-messages.patch
+make install
+```
+
+## Credits
+
+Based on the Signal Desktop [reproducible builds](https://github.com/signalapp/Signal-Desktop/tree/main/reproducible-builds).

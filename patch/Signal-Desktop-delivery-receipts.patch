@@ -1,0 +1,14 @@
+diff --git a/ts/util/sendReceipts.preload.ts b/ts/util/sendReceipts.preload.ts
+index 0da5279..11cda7c 100644
+--- a/ts/util/sendReceipts.preload.ts
++++ b/ts/util/sendReceipts.preload.ts
+@@ -56,6 +56,9 @@ export async function sendReceipts({
+     return;
+   }
+ 
++  // do not send receipts
++  return;
++
+   log.info(`Starting receipt send of type ${type}`);
+ 
+   type ConversationSenderReceiptGroup = {
