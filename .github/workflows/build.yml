@@ -43,7 +43,7 @@ jobs:
           cd repo/${{ matrix.releasever }}/${{ matrix.basearch }}
           export GPG_TTY=$(tty)
           rpm --define "_gpg_name 98AD93E28D7EB8B7F990BF2E55827D8FD54C06D0" --addsign *.rpm
-          createrepo_c --update .
+          createrepo_c --baseurl https://github.com/BarbossHack/signal-desktop-fedora-debug/releases/download/v8.22.0/ .
           gpg --detach-sign --armor repodata/repomd.xml
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
@@ -58,11 +58,12 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           merge-multiple: true
           path: repo
+      - run: find repo/ -name "*.rpm" -delete
+      - run: tree -h repo
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: repo
@@ -75,7 +76,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           merge-multiple: true
